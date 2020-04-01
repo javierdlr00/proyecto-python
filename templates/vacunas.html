@@ -1,0 +1,47 @@
+{% extends "index.html" %}
+{% block title %}{{titulo}}{% endblock %}
+{% block content %}
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box">
+      <div class="box-header">
+        <form action="/vacunas/add">
+          <div class="form-inline">
+            <button type="submit" class="btn btn-success"><i class="fa fa-plus-circle" aria-hidden="true"></i> Nueva Vacuna</button>
+          </div>
+        </form>
+        <br>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body table-responsive no-padding">
+        <table class="table table-hover" id="myTable">
+  <thead>
+    <th>Enfermedad</th>
+    <th>Fecha de Registro</th>
+    <th>Pacientes</th>
+  </thead>
+
+  <tr>
+
+    {% for vacunas in vac %}
+    <tr>
+      <td>{{ vacunas['nombre_enfermedad'] }}</td>
+      <td>{{ vacunas['fecha_ingreso'] }}</td>
+      <td>
+        <form action="/vacunas/pacientes" method="post">
+          <button type="submit" class="btn btn-info"><i class="fa fa-eye" aria-hidden="true"></i> Ver</button>
+          <input type="text" name="id" id="id" value="{{vacunas['id']}}" hidden>
+        </form>
+      </td>
+    </tr>
+  </tr>
+  {% endfor %}
+        </table>
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </div>
+</div>
+{% endblock %}
